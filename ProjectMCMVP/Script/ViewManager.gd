@@ -1,0 +1,65 @@
+class_name ViewManager
+extends Node
+
+@export var missileViewScene : PackedScene
+@export var siloViewScene : PackedScene
+@export var playerMissileViewScene : PackedScene
+@export var explosionView: PackedScene
+@export var cityViewScene: PackedScene
+@export var enemyMissileView3D : PackedScene
+
+var views: Dictionary = {}
+var views3d: Dictionary = {}
+	
+
+func onEntityAdded(entity: Entity):
+	match entity.getType():
+		Entity.Type.MISSILE: onMissileAdded(entity)
+		Entity.Type.SILO: onSiloAdded(entity)
+		Entity.Type.PLAYER_MISSILE: onPlayerMissileAdded(entity)
+		Entity.Type.EXPLOSION: onExplosionAdded(entity)
+		Entity.Type.CITY: onCityAdded(entity)
+		_: push_warning("Unknown entity type: ", entity.getType())
+	
+
+
+func onCityAdded(city: CityData):
+	var view: CityView = cityViewScene.instantiate()
+	view.cityData = city
+	add_child(view)
+	views[city] = view
+	
+func onMissileAdded(missile: MissileData):
+	var view: MissileView = missileViewScene.instantiate()
+	view.missileData = missile
+	add_child(view)
+	views[missile] = view
+	
+	var view3d : EnemyMissileView3D = enemyMissileView3D.instantiate()
+	view3d.missileData = missile
+	add_child(view3d)
+	views3d[missile] = view3d
+	
+func onSiloAdded(silo: SiloData):
+	var view: SiloView = siloViewScene.instantiate()
+	view.siloData = silo
+	add_child(view)
+	views[silo] = view
+	
+func onPlayerMissileAdded(missile: PlayerMissileData):
+	var view: PlayerMissileView = playerMissileViewScene.instantiate()
+	view.playerMissileData = missile
+	add_child(view)
+	views[missile] = view
+
+func onEntityRemoved(entity: Entity):
+	var view = views.get(entity)
+	if view:
+		view.queue_free()
+		views.erase(entity)
+		
+func onExplosionAdded(explosion:ExplosionData):
+	var view: ExplosionView = explosionView.instantiate()
+	view.explosionData = explosion
+	add_child(view)
+	views[explosion] = view

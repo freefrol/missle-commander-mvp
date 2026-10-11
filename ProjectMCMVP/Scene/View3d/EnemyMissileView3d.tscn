@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://byf4clro1nw8u"]
+
+[ext_resource type="Script" uid="uid://0qr4kqmhy8hr" path="res://ProjectMCMVP/Script/View/View3D/EnemyMissileView3D.gd" id="1_cq1n1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g7b7a"]
+
+[node name="EnemyMissileView3d" type="Node3D" unique_id=434954972]
+script = ExtResource("1_cq1n1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1790228095]
+mesh = SubResource("CapsuleMesh_g7b7a")

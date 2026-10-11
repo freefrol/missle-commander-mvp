@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bathqrmidgh6r"]
+
+[ext_resource type="Script" uid="uid://ccd43i8vnij6p" path="res://ProjectMCMVP/Script/GameManager.gd" id="1_meahf"]
+[ext_resource type="Script" uid="uid://cug42kh35tjd" path="res://ProjectMCMVP/Script/ViewManager.gd" id="2_j5wpf"]
+[ext_resource type="PackedScene" uid="uid://bnfd2cnflbssg" path="res://ProjectMCMVP/Scene/MissileView.tscn" id="3_olnhy"]
+[ext_resource type="PackedScene" uid="uid://841t44at0ya" path="res://ProjectMCMVP/Scene/SilosView.tscn" id="4_mqwes"]
+[ext_resource type="PackedScene" uid="uid://ctyq8t3xflhc" path="res://ProjectMCMVP/Scene/PlayerMissileView.tscn" id="5_1444q"]
+[ext_resource type="PackedScene" uid="uid://de8ifwgb1f32m" path="res://ProjectMCMVP/Scene/ExplosionView.tscn" id="6_mqwes"]
+[ext_resource type="Script" uid="uid://0g31b14hmha0" path="res://ProjectMCMVP/Script/ShootController.gd" id="6_olnhy"]
+[ext_resource type="PackedScene" uid="uid://b8o7pdqo2pkqs" path="res://ProjectMCMVP/Scene/CityView.tscn" id="7_1444q"]
+[ext_resource type="PackedScene" uid="uid://byf4clro1nw8u" path="res://ProjectMCMVP/Scene/View3d/EnemyMissileView3d.tscn" id="8_5uf2e"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1444q"]
+
+[node name="GameManager" type="Node2D" unique_id=913984937 node_paths=PackedStringArray("viewManager", "shootController", "restartButton", "canvas")]
+script = ExtResource("1_meahf")
+viewManager = NodePath("ViewManager")
+shootController = NodePath("ShootController")
+restartButton = NodePath("CanvasLayer/CenterContainer/Button")
+canvas = NodePath("CanvasLayer")
+
+[node name="ViewManager" type="Node" parent="." unique_id=1455506871]
+script = ExtResource("2_j5wpf")
+missileViewScene = ExtResource("3_olnhy")
+siloViewScene = ExtResource("4_mqwes")
+playerMissileViewScene = ExtResource("5_1444q")
+explosionView = ExtResource("6_mqwes")
+cityViewScene = ExtResource("7_1444q")
+enemyMissileView3D = ExtResource("8_5uf2e")
+
+[node name="ShootController" type="Node2D" parent="." unique_id=1862675667]
+script = ExtResource("6_olnhy")
+missileSpeed = 0.4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1082172640]
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=362488563]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/CenterContainer" unique_id=525786782]
+layout_mode = 2
+text = "restart"
+
+[node name="Node3D" type="Node3D" parent="." unique_id=2015916303]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=2025379260]
+transform = Transform3D(1, 0, 0, 0, 0.86443603, 0.5027428, 0, -0.5027428, 0.86443603, 0, 0.28810206, 1.0680768)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D" unique_id=602679101]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1983710761]
+top_level = true
+mesh = SubResource("PlaneMesh_1444q")
