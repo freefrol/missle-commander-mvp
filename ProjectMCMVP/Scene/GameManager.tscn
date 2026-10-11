@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bathqrmidgh6r"]
 
 [ext_resource type="Script" uid="uid://ccd43i8vnij6p" path="res://ProjectMCMVP/Script/GameManager.gd" id="1_meahf"]
-[ext_resource type="Script" uid="uid://cug42kh35tjd" path="res://ProjectMCMVP/Script/ViewManager.gd" id="2_j5wpf"]
-[ext_resource type="PackedScene" uid="uid://bnfd2cnflbssg" path="res://ProjectMCMVP/Scene/MissileView.tscn" id="3_olnhy"]
-[ext_resource type="PackedScene" uid="uid://841t44at0ya" path="res://ProjectMCMVP/Scene/SilosView.tscn" id="4_mqwes"]
-[ext_resource type="PackedScene" uid="uid://ctyq8t3xflhc" path="res://ProjectMCMVP/Scene/PlayerMissileView.tscn" id="5_1444q"]
-[ext_resource type="PackedScene" uid="uid://de8ifwgb1f32m" path="res://ProjectMCMVP/Scene/ExplosionView.tscn" id="6_mqwes"]
-[ext_resource type="Script" uid="uid://0g31b14hmha0" path="res://ProjectMCMVP/Script/ShootController.gd" id="6_olnhy"]
-[ext_resource type="PackedScene" uid="uid://b8o7pdqo2pkqs" path="res://ProjectMCMVP/Scene/CityView.tscn" id="7_1444q"]
+[ext_resource type="Script" uid="uid://cug42kh35tjd" path="res://ProjectMCMVP/Script/Controller/ViewManager.gd" id="2_j5wpf"]
+[ext_resource type="PackedScene" uid="uid://bxomu1ry7mcwt" path="res://ProjectMCMVP/Scene/View2d/EnemyMissileview2d.tscn" id="3_1444q"]
+[ext_resource type="PackedScene" uid="uid://dkuyyr48yghmt" path="res://ProjectMCMVP/Scene/View2d/SiloView2d.tscn" id="4_5uf2e"]
+[ext_resource type="PackedScene" uid="uid://bcgdxt32n2dem" path="res://ProjectMCMVP/Scene/View2d/PlayerMissileView2d.tscn" id="5_3ctgo"]
+[ext_resource type="PackedScene" uid="uid://yih2sjomfok1" path="res://ProjectMCMVP/Scene/View2d/ExplosionView2d.tscn" id="6_5uf2e"]
+[ext_resource type="Script" uid="uid://0g31b14hmha0" path="res://ProjectMCMVP/Script/Controller/ShootController.gd" id="6_olnhy"]
+[ext_resource type="PackedScene" uid="uid://br2y2retsdvyg" path="res://ProjectMCMVP/Scene/View2d/CityView2d.tscn" id="6_wpru5"]
 [ext_resource type="PackedScene" uid="uid://byf4clro1nw8u" path="res://ProjectMCMVP/Scene/View3d/EnemyMissileView3d.tscn" id="8_5uf2e"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1444q"]
@@ -21,11 +21,11 @@ canvas = NodePath("CanvasLayer")
 
 [node name="ViewManager" type="Node" parent="." unique_id=1455506871]
 script = ExtResource("2_j5wpf")
-missileViewScene = ExtResource("3_olnhy")
-siloViewScene = ExtResource("4_mqwes")
-playerMissileViewScene = ExtResource("5_1444q")
-explosionView = ExtResource("6_mqwes")
-cityViewScene = ExtResource("7_1444q")
+missileViewScene = ExtResource("3_1444q")
+siloViewScene = ExtResource("4_5uf2e")
+playerMissileViewScene = ExtResource("5_3ctgo")
+explosionView = ExtResource("6_5uf2e")
+cityViewScene = ExtResource("6_wpru5")
 enemyMissileView3D = ExtResource("8_5uf2e")
 
 [node name="ShootController" type="Node2D" parent="." unique_id=1862675667]
@@ -55,10 +55,13 @@ text = "restart"
 [node name="Node3D" type="Node3D" parent="." unique_id=2015916303]
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=2025379260]
-transform = Transform3D(1, 0, 0, 0, 0.86443603, 0.5027428, 0, -0.5027428, 0.86443603, 0, 0.28810206, 1.0680768)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28810206, 1.0680768)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D" unique_id=602679101]
+top_level = true
+shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1983710761]
 top_level = true
+visible = false
 mesh = SubResource("PlaneMesh_1444q")

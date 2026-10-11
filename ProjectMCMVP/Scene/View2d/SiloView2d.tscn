@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dkuyyr48yghmt"]
+
+[ext_resource type="Script" uid="uid://0yxlfoq3hgll" path="res://ProjectMCMVP/Script/View/View2d/SiloView.gd" id="1_bel5a"]
+[ext_resource type="Texture2D" uid="uid://ct3xywaestypp" path="res://ProjectMCMVP/Sprite/Square (20260826112844).png" id="2_qs01i"]
+
+[node name="SiloView2d" type="Node2D" unique_id=1240715524 node_paths=PackedStringArray("sprite", "fillSprite")]
+script = ExtResource("1_bel5a")
+sprite = NodePath("Sprite2D")
+fillSprite = NodePath("Sprite2D2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1292228493]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_qs01i")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=416701619]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_qs01i")

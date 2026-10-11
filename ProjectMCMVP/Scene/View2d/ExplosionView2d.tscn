@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://yih2sjomfok1"]
+
+[ext_resource type="Script" uid="uid://ck3lcwjvutka8" path="res://ProjectMCMVP/Script/View/View2d/ExplosionView.gd" id="1_w251b"]
+
+[node name="ExplosionView2d" type="Node2D" unique_id=196808206]
+script = ExtResource("1_w251b")

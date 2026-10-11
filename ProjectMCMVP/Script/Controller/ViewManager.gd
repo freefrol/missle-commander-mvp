@@ -34,7 +34,7 @@ func onMissileAdded(missile: MissileData):
 	view.missileData = missile
 	add_child(view)
 	views[missile] = view
-	
+	"restartButton"
 	var view3d : EnemyMissileView3D = enemyMissileView3D.instantiate()
 	view3d.missileData = missile
 	add_child(view3d)
@@ -57,6 +57,11 @@ func onEntityRemoved(entity: Entity):
 	if view:
 		view.queue_free()
 		views.erase(entity)
+		
+	var view3d = views3d.get(entity)
+	if view3d:
+		view3d.queue_free()
+		views3d.erase(entity)
 		
 func onExplosionAdded(explosion:ExplosionData):
 	var view: ExplosionView = explosionView.instantiate()

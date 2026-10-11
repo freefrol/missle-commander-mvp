@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bcgdxt32n2dem"]
+
+[ext_resource type="Script" uid="uid://c0osajuok61se" path="res://ProjectMCMVP/Script/View/View2d/PlayerMissileView.gd" id="1_v7pi5"]
+[ext_resource type="Texture2D" uid="uid://cobotjqo7hc0v" path="res://ProjectMCMVP/Sprite/Rocket.png" id="2_o2fmj"]
+
+[node name="PlayerMissileView2d" type="Node2D" unique_id=1655424500]
+scale = Vector2(0.02, 0.02)
+script = ExtResource("1_v7pi5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=946141340]
+texture = ExtResource("2_o2fmj")
