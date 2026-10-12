@@ -10,7 +10,15 @@
 [ext_resource type="PackedScene" uid="uid://br2y2retsdvyg" path="res://ProjectMCMVP/Scene/View2d/CityView2d.tscn" id="6_wpru5"]
 [ext_resource type="PackedScene" uid="uid://byf4clro1nw8u" path="res://ProjectMCMVP/Scene/View3d/EnemyMissileView3d.tscn" id="8_5uf2e"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_1444q"]
+[sub_resource type="QuadMesh" id="QuadMesh_6n2gk"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5uf2e"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ne880"]
+resource_local_to_scene = true
+cull_mode = 2
+albedo_texture = SubResource("ViewportTexture_5uf2e")
 
 [node name="GameManager" type="Node2D" unique_id=913984937 node_paths=PackedStringArray("viewManager", "shootController", "restartButton", "canvas")]
 script = ExtResource("1_meahf")
@@ -19,8 +27,15 @@ shootController = NodePath("ShootController")
 restartButton = NodePath("CanvasLayer/CenterContainer/Button")
 canvas = NodePath("CanvasLayer")
 
-[node name="ViewManager" type="Node" parent="." unique_id=1455506871]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=2061251117]
+render_target_update_mode = 4
+
+[node name="Node2D" type="Node2D" parent="SubViewport" unique_id=1541576858]
+
+[node name="ViewManager" type="Node" parent="." unique_id=1455506871 node_paths=PackedStringArray("subViewport", "worldNode2d")]
 script = ExtResource("2_j5wpf")
+subViewport = NodePath("../SubViewport")
+worldNode2d = NodePath("../SubViewport/Node2D")
 missileViewScene = ExtResource("3_1444q")
 siloViewScene = ExtResource("4_5uf2e")
 playerMissileViewScene = ExtResource("5_3ctgo")
@@ -55,13 +70,14 @@ text = "restart"
 [node name="Node3D" type="Node3D" parent="." unique_id=2015916303]
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=2025379260]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28810206, 1.0680768)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.57655)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D" unique_id=602679101]
 top_level = true
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1983710761]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.014239192, 0, -2.9454076)
 top_level = true
-visible = false
-mesh = SubResource("PlaneMesh_1444q")
+mesh = SubResource("QuadMesh_6n2gk")
+surface_material_override/0 = SubResource("StandardMaterial3D_ne880")

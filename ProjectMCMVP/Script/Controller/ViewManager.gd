@@ -1,6 +1,8 @@
 class_name ViewManager
 extends Node
 
+@export var subViewport: SubViewport
+@export var worldNode2d: Node2D
 @export var missileViewScene : PackedScene
 @export var siloViewScene : PackedScene
 @export var playerMissileViewScene : PackedScene
@@ -26,13 +28,13 @@ func onEntityAdded(entity: Entity):
 func onCityAdded(city: CityData):
 	var view: CityView = cityViewScene.instantiate()
 	view.cityData = city
-	add_child(view)
+	worldNode2d.add_child(view)
 	views[city] = view
 	
 func onMissileAdded(missile: MissileData):
 	var view: MissileView = missileViewScene.instantiate()
 	view.missileData = missile
-	add_child(view)
+	worldNode2d.add_child(view)
 	views[missile] = view
 	"restartButton"
 	var view3d : EnemyMissileView3D = enemyMissileView3D.instantiate()
@@ -43,13 +45,13 @@ func onMissileAdded(missile: MissileData):
 func onSiloAdded(silo: SiloData):
 	var view: SiloView = siloViewScene.instantiate()
 	view.siloData = silo
-	add_child(view)
+	worldNode2d.add_child(view)
 	views[silo] = view
 	
 func onPlayerMissileAdded(missile: PlayerMissileData):
 	var view: PlayerMissileView = playerMissileViewScene.instantiate()
 	view.playerMissileData = missile
-	add_child(view)
+	worldNode2d.add_child(view)
 	views[missile] = view
 
 func onEntityRemoved(entity: Entity):
@@ -66,5 +68,5 @@ func onEntityRemoved(entity: Entity):
 func onExplosionAdded(explosion:ExplosionData):
 	var view: ExplosionView = explosionView.instantiate()
 	view.explosionData = explosion
-	add_child(view)
+	worldNode2d.add_child(view)
 	views[explosion] = view
