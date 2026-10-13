@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bathqrmidgh6r"]
 
 [ext_resource type="Script" uid="uid://ccd43i8vnij6p" path="res://ProjectMCMVP/Script/GameManager.gd" id="1_meahf"]
+[ext_resource type="Script" uid="uid://bojlvp1wai6ea" path="res://ProjectMCMVP/Script/Controller/PlayerController.gd" id="2_3ctgo"]
 [ext_resource type="Script" uid="uid://cug42kh35tjd" path="res://ProjectMCMVP/Script/Controller/ViewManager.gd" id="2_j5wpf"]
 [ext_resource type="PackedScene" uid="uid://bxomu1ry7mcwt" path="res://ProjectMCMVP/Scene/View2d/EnemyMissileview2d.tscn" id="3_1444q"]
 [ext_resource type="PackedScene" uid="uid://dkuyyr48yghmt" path="res://ProjectMCMVP/Scene/View2d/SiloView2d.tscn" id="4_5uf2e"]
@@ -9,6 +10,10 @@
 [ext_resource type="Script" uid="uid://0g31b14hmha0" path="res://ProjectMCMVP/Script/Controller/ShootController.gd" id="6_olnhy"]
 [ext_resource type="PackedScene" uid="uid://br2y2retsdvyg" path="res://ProjectMCMVP/Scene/View2d/CityView2d.tscn" id="6_wpru5"]
 [ext_resource type="PackedScene" uid="uid://byf4clro1nw8u" path="res://ProjectMCMVP/Scene/View3d/EnemyMissileView3d.tscn" id="8_5uf2e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7b7a"]
+radius = 0.4
+height = 1.8
 
 [sub_resource type="QuadMesh" id="QuadMesh_6n2gk"]
 
@@ -26,6 +31,19 @@ viewManager = NodePath("ViewManager")
 shootController = NodePath("ShootController")
 restartButton = NodePath("CanvasLayer/CenterContainer/Button")
 canvas = NodePath("CanvasLayer")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=2023121026 node_paths=PackedStringArray("cameraPivot")]
+script = ExtResource("2_3ctgo")
+cameraPivot = NodePath("CameraPivot")
+turnSpeed = 0.02
+
+[node name="CameraPivot" type="Node3D" parent="Player" unique_id=597561267]
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=582329450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1676460416]
+shape = SubResource("CapsuleShape3D_g7b7a")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2061251117]
 render_target_update_mode = 4
@@ -69,15 +87,12 @@ text = "restart"
 
 [node name="Node3D" type="Node3D" parent="." unique_id=2015916303]
 
-[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=2025379260]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.57655)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D" unique_id=602679101]
 top_level = true
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1983710761]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.014239192, 0, -2.9454076)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.1972773, -2.945)
 top_level = true
 mesh = SubResource("QuadMesh_6n2gk")
 surface_material_override/0 = SubResource("StandardMaterial3D_ne880")
