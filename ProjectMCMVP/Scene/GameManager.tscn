@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://0g31b14hmha0" path="res://ProjectMCMVP/Script/Controller/ShootController.gd" id="6_olnhy"]
 [ext_resource type="PackedScene" uid="uid://br2y2retsdvyg" path="res://ProjectMCMVP/Scene/View2d/CityView2d.tscn" id="6_wpru5"]
 [ext_resource type="PackedScene" uid="uid://byf4clro1nw8u" path="res://ProjectMCMVP/Scene/View3d/EnemyMissileView3d.tscn" id="8_5uf2e"]
+[ext_resource type="Script" uid="uid://c33cpvigqiso6" path="res://ProjectMCMVP/Script/Controller/StickControl.gd" id="11_qft2m"]
+[ext_resource type="Texture2D" uid="uid://41bfeg1k5qr4" path="res://ProjectMCMVP/Sprite/Circle (20261014102636).png" id="11_wpru5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7b7a"]
 radius = 0.4
@@ -32,9 +34,12 @@ shootController = NodePath("ShootController")
 restartButton = NodePath("CanvasLayer/CenterContainer/Button")
 canvas = NodePath("CanvasLayer")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=2023121026 node_paths=PackedStringArray("cameraPivot")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=2023121026 node_paths=PackedStringArray("moveJoystick", "lookJoystick", "cameraPivot")]
 script = ExtResource("2_3ctgo")
+moveJoystick = NodePath("../CanvasLayer2/LeftVirtualJoystick")
+lookJoystick = NodePath("../CanvasLayer2/RightVirtualJoystick")
 cameraPivot = NodePath("CameraPivot")
+moveSpeed = 0.5
 turnSpeed = 0.02
 
 [node name="CameraPivot" type="Node3D" parent="Player" unique_id=597561267]
@@ -96,3 +101,61 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.1972773, -2.945)
 top_level = true
 mesh = SubResource("QuadMesh_6n2gk")
 surface_material_override/0 = SubResource("StandardMaterial3D_ne880")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1717088253]
+
+[node name="LeftVirtualJoystick" type="Control" parent="CanvasLayer2" unique_id=1962073985 node_paths=PackedStringArray("background", "knob")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 406.0
+offset_right = 45.0
+offset_bottom = 446.0
+script = ExtResource("11_qft2m")
+background = NodePath("Background")
+knob = NodePath("Knob")
+
+[node name="Background" type="TextureRect" parent="CanvasLayer2/LeftVirtualJoystick" unique_id=104310097]
+modulate = Color(0.19, 0.19, 0.19, 0.5019608)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+texture = ExtResource("11_wpru5")
+
+[node name="Knob" type="TextureRect" parent="CanvasLayer2/LeftVirtualJoystick" unique_id=899590720]
+modulate = Color(0.43, 0.43, 0.43, 1)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 320.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_wpru5")
+
+[node name="RightVirtualJoystick" type="Control" parent="CanvasLayer2" unique_id=742785057 node_paths=PackedStringArray("background", "knob")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 868.0
+offset_top = 391.0
+offset_right = 908.0
+offset_bottom = 431.0
+script = ExtResource("11_qft2m")
+background = NodePath("Background")
+knob = NodePath("Knob")
+
+[node name="Background" type="TextureRect" parent="CanvasLayer2/RightVirtualJoystick" unique_id=1278995131]
+modulate = Color(0.19, 0.19, 0.19, 0.5019608)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+texture = ExtResource("11_wpru5")
+
+[node name="Knob" type="TextureRect" parent="CanvasLayer2/RightVirtualJoystick" unique_id=1031363459]
+modulate = Color(0.43, 0.43, 0.43, 1)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 320.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_wpru5")
