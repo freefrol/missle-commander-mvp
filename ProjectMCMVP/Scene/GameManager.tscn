@@ -27,6 +27,9 @@ resource_local_to_scene = true
 cull_mode = 2
 albedo_texture = SubResource("ViewportTexture_5uf2e")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_g7b7a"]
+size = Vector3(1, 1, 0.1)
+
 [node name="GameManager" type="Node2D" unique_id=913984937 node_paths=PackedStringArray("viewManager", "shootController", "restartButton", "canvas")]
 script = ExtResource("1_meahf")
 viewManager = NodePath("ViewManager")
@@ -66,9 +69,11 @@ explosionView = ExtResource("6_5uf2e")
 cityViewScene = ExtResource("6_wpru5")
 enemyMissileView3D = ExtResource("8_5uf2e")
 
-[node name="ShootController" type="Node2D" parent="." unique_id=1862675667]
+[node name="ShootController" type="Node2D" parent="." unique_id=1862675667 node_paths=PackedStringArray("camera", "monitor")]
 script = ExtResource("6_olnhy")
 missileSpeed = 0.4
+camera = NodePath("../Player/CameraPivot/Camera3D")
+monitor = NodePath("../Node3D/Monitor")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1082172640]
 visible = false
@@ -96,11 +101,17 @@ text = "restart"
 top_level = true
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1983710761]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.1972773, -2.945)
+[node name="Monitor" type="StaticBody3D" parent="Node3D" unique_id=115083065]
+transform = Transform3D(1, 0, 0, 0, 0.807371, 0.5900441, 0, -0.5900441, 0.807371, 0, 1.5, -3.04)
 top_level = true
+input_capture_on_drag = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Monitor" unique_id=1983710761]
 mesh = SubResource("QuadMesh_6n2gk")
 surface_material_override/0 = SubResource("StandardMaterial3D_ne880")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Monitor" unique_id=502431872]
+shape = SubResource("BoxShape3D_g7b7a")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1717088253]
 
