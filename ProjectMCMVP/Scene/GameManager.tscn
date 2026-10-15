@@ -43,9 +43,9 @@ moveSpeed = 0.5
 turnSpeed = 0.02
 
 [node name="CameraPivot" type="Node3D" parent="Player" unique_id=597561267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=582329450]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1676460416]
 shape = SubResource("CapsuleShape3D_g7b7a")
@@ -106,11 +106,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ne880")
 
 [node name="LeftVirtualJoystick" type="Control" parent="CanvasLayer2" unique_id=1962073985 node_paths=PackedStringArray("background", "knob")]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 5.0
-offset_top = 406.0
-offset_right = 261.0
-offset_bottom = 662.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_right = 256.0
+grow_vertical = 0
 script = ExtResource("11_qft2m")
 background = NodePath("Background")
 knob = NodePath("Knob")
@@ -134,11 +135,15 @@ texture = ExtResource("11_wpru5")
 
 [node name="RightVirtualJoystick" type="Control" parent="CanvasLayer2" unique_id=742785057 node_paths=PackedStringArray("background", "knob")]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 868.0
-offset_top = 391.0
-offset_right = 1124.0
-offset_bottom = 647.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -256.0
+grow_horizontal = 0
+grow_vertical = 0
 script = ExtResource("11_qft2m")
 background = NodePath("Background")
 knob = NodePath("Knob")
