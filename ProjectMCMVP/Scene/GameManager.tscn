@@ -58,6 +58,11 @@ render_target_update_mode = 4
 
 [node name="Node2D" type="Node2D" parent="SubViewport" unique_id=1541576858]
 
+[node name="ColorRect" type="ColorRect" parent="SubViewport/Node2D" unique_id=1278613860]
+offset_right = 512.0
+offset_bottom = 512.0
+color = Color(0, 0.15, 0.0375, 1)
+
 [node name="ViewManager" type="Node" parent="." unique_id=1455506871 node_paths=PackedStringArray("subViewport", "worldNode2d")]
 script = ExtResource("2_j5wpf")
 subViewport = NodePath("../SubViewport")
