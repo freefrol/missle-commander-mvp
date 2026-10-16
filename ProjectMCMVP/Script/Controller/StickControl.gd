@@ -16,6 +16,7 @@ func _ready():
 
 func _gui_input(event: InputEvent):
 	if event is InputEventScreenTouch:
+		accept_event()
 		if event.pressed:
 			active = true
 			updateDirection(event.position)
@@ -23,8 +24,9 @@ func _gui_input(event: InputEvent):
 			active = false
 			direction = Vector2.ZERO
 			knob.position = centerOffset
-	elif event is InputEventScreenDrag and active:
-		updateDirection(event.position)
+	elif event is InputEventScreenDrag:
+		accept_event()
+		if active: updateDirection(event.position)
 
 func updateDirection(touchPos: Vector2):
 	var center = background.position + background.size / 2

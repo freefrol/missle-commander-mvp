@@ -10,7 +10,7 @@ var siloController: SiloController
 var worldData: WorldData
 var isGameStop: bool = false
 
-func _input(event):
+func _unhandled_input(event):
 	if isGameStop: return
 	if not event is InputEventScreenTouch or not event.pressed:
 		return
