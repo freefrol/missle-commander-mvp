@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://0g31b14hmha0" path="res://ProjectMCMVP/Script/Controller/ShootController.gd" id="6_olnhy"]
 [ext_resource type="PackedScene" uid="uid://br2y2retsdvyg" path="res://ProjectMCMVP/Scene/View2d/CityView2d.tscn" id="6_wpru5"]
 [ext_resource type="PackedScene" uid="uid://byf4clro1nw8u" path="res://ProjectMCMVP/Scene/View3d/EnemyMissileView3d.tscn" id="8_5uf2e"]
+[ext_resource type="PackedScene" uid="uid://dtb2gvk8s3o27" path="res://ProjectMCMVP/Scene/View3d/PlayerMissileView3d.tscn" id="10_thtin"]
+[ext_resource type="PackedScene" uid="uid://dvd68dyys7dac" path="res://ProjectMCMVP/Scene/View3d/ExplosionView3d.tscn" id="11_3klw6"]
 [ext_resource type="Script" uid="uid://c33cpvigqiso6" path="res://ProjectMCMVP/Script/Controller/StickControl.gd" id="11_qft2m"]
 [ext_resource type="Texture2D" uid="uid://41bfeg1k5qr4" path="res://ProjectMCMVP/Sprite/Circle (20261014102636).png" id="11_wpru5"]
 
@@ -29,6 +31,15 @@ albedo_texture = SubResource("ViewportTexture_5uf2e")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g7b7a"]
 size = Vector3(1, 1, 0.1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_thtin"]
+
+[sub_resource type="Sky" id="Sky_gyc6d"]
+sky_material = SubResource("ProceduralSkyMaterial_thtin")
+
+[sub_resource type="Environment" id="Environment_g7b7a"]
+background_mode = 2
+sky = SubResource("Sky_gyc6d")
 
 [node name="GameManager" type="Node2D" unique_id=913984937 node_paths=PackedStringArray("viewManager", "shootController", "restartButton", "canvas")]
 script = ExtResource("1_meahf")
@@ -61,7 +72,7 @@ render_target_update_mode = 4
 [node name="ColorRect" type="ColorRect" parent="SubViewport/Node2D" unique_id=1278613860]
 offset_right = 512.0
 offset_bottom = 512.0
-color = Color(0, 0.15, 0.0375, 1)
+color = Color(0, 0.06666667, 0, 1)
 
 [node name="ViewManager" type="Node" parent="." unique_id=1455506871 node_paths=PackedStringArray("subViewport", "worldNode2d")]
 script = ExtResource("2_j5wpf")
@@ -73,6 +84,8 @@ playerMissileViewScene = ExtResource("5_3ctgo")
 explosionView = ExtResource("6_5uf2e")
 cityViewScene = ExtResource("6_wpru5")
 enemyMissileView3D = ExtResource("8_5uf2e")
+playerMissileView3d = ExtResource("10_thtin")
+explosionView3d = ExtResource("11_3klw6")
 
 [node name="ShootController" type="Node2D" parent="." unique_id=1862675667 node_paths=PackedStringArray("camera", "monitor")]
 script = ExtResource("6_olnhy")
@@ -180,3 +193,6 @@ offset_right = 320.0
 offset_bottom = 320.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_wpru5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=45353479]
+environment = SubResource("Environment_g7b7a")

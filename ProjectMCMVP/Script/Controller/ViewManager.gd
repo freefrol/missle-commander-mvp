@@ -9,6 +9,8 @@ extends Node
 @export var explosionView: PackedScene
 @export var cityViewScene: PackedScene
 @export var enemyMissileView3D : PackedScene
+@export var playerMissileView3d : PackedScene
+@export var explosionView3d : PackedScene
 
 var views: Dictionary = {}
 var views3d: Dictionary = {}
@@ -36,7 +38,7 @@ func onMissileAdded(missile: MissileData):
 	view.missileData = missile
 	worldNode2d.add_child(view)
 	views[missile] = view
-	"restartButton"
+	
 	var view3d : EnemyMissileView3D = enemyMissileView3D.instantiate()
 	view3d.missileData = missile
 	add_child(view3d)
@@ -53,6 +55,11 @@ func onPlayerMissileAdded(missile: PlayerMissileData):
 	view.playerMissileData = missile
 	worldNode2d.add_child(view)
 	views[missile] = view
+	
+	var view3d : PlayerMissileView3d = playerMissileView3d.instantiate()
+	view3d.missileData = missile
+	add_child(view3d)
+	views3d[missile] = view3d
 
 func onEntityRemoved(entity: Entity):
 	var view = views.get(entity)
@@ -70,3 +77,8 @@ func onExplosionAdded(explosion:ExplosionData):
 	view.explosionData = explosion
 	worldNode2d.add_child(view)
 	views[explosion] = view
+
+	var view3d : ExplosionView3D = explosionView3d.instantiate()
+	view3d.explosionData = explosion
+	add_child(view3d)
+	views3d[explosion] = view3d

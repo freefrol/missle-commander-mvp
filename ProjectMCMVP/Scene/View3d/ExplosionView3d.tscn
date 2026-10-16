@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dvd68dyys7dac"]
+
+[ext_resource type="Script" uid="uid://cxidhxnwigdu6" path="res://ProjectMCMVP/Script/View/View3D/ExplosionView3D.gd" id="1_gftcr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_g7b7a"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_niwli"]
+transparency = 1
+albedo_color = Color(1, 0.65, 0, 0.6745098)
+albedo_texture_msdf = true
+emission_enabled = true
+emission = Color(1, 0.622, 0.19, 1)
+
+[node name="ExplosionView3d" type="Node3D" unique_id=814743714]
+top_level = true
+script = ExtResource("1_gftcr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1186997842]
+mesh = SubResource("SphereMesh_g7b7a")
+surface_material_override/0 = SubResource("StandardMaterial3D_niwli")
