@@ -1,6 +1,7 @@
 class_name ViewManager
 extends Node
 
+@export var worldBounds: WorldBounds
 @export var subViewport: SubViewport
 @export var worldNode2d: Node2D
 @export var missileViewScene : PackedScene
@@ -11,6 +12,7 @@ extends Node
 @export var enemyMissileView3D : PackedScene
 @export var playerMissileView3d : PackedScene
 @export var explosionView3d : PackedScene
+@export var cityView3d : PackedScene
 
 var views: Dictionary = {}
 var views3d: Dictionary = {}
@@ -33,6 +35,12 @@ func onCityAdded(city: CityData):
 	worldNode2d.add_child(view)
 	views[city] = view
 	
+	var view3d : CityView3d = cityView3d.instantiate()
+	view3d.cityData = city
+	view3d.worldBounds = worldBounds
+	add_child(view3d)
+	views3d[city] = view3d
+	
 func onMissileAdded(missile: MissileData):
 	var view: MissileView = missileViewScene.instantiate()
 	view.missileData = missile
@@ -41,6 +49,7 @@ func onMissileAdded(missile: MissileData):
 	
 	var view3d : EnemyMissileView3D = enemyMissileView3D.instantiate()
 	view3d.missileData = missile
+	view3d.worldBounds = worldBounds
 	add_child(view3d)
 	views3d[missile] = view3d
 	
@@ -58,6 +67,7 @@ func onPlayerMissileAdded(missile: PlayerMissileData):
 	
 	var view3d : PlayerMissileView3d = playerMissileView3d.instantiate()
 	view3d.missileData = missile
+	view3d.worldBounds = worldBounds
 	add_child(view3d)
 	views3d[missile] = view3d
 
@@ -80,5 +90,6 @@ func onExplosionAdded(explosion:ExplosionData):
 
 	var view3d : ExplosionView3D = explosionView3d.instantiate()
 	view3d.explosionData = explosion
+	view3d.worldBounds = worldBounds
 	add_child(view3d)
 	views3d[explosion] = view3d

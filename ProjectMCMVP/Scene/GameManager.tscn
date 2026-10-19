@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://dvd68dyys7dac" path="res://ProjectMCMVP/Scene/View3d/ExplosionView3d.tscn" id="11_3klw6"]
 [ext_resource type="Script" uid="uid://c33cpvigqiso6" path="res://ProjectMCMVP/Script/Controller/StickControl.gd" id="11_qft2m"]
 [ext_resource type="Texture2D" uid="uid://41bfeg1k5qr4" path="res://ProjectMCMVP/Sprite/Circle (20261014102636).png" id="11_wpru5"]
+[ext_resource type="PackedScene" uid="uid://mqxhmktpws2o" path="res://ProjectMCMVP/Scene/View3d/CityView3d.tscn" id="12_nhsc2"]
+[ext_resource type="Script" uid="uid://cx883qdhjdtt7" path="res://ProjectMCMVP/Script/WorldBounds.gd" id="14_6quo3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7b7a"]
 radius = 0.4
@@ -31,6 +33,16 @@ albedo_texture = SubResource("ViewportTexture_5uf2e")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g7b7a"]
 size = Vector3(1, 1, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_gyc6d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qx4q"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+disable_specular_occlusion = true
+albedo_color = Color(0.29807433, 0.7592373, 0, 0.1882353)
+albedo_texture_msdf = true
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_thtin"]
 
@@ -74,8 +86,9 @@ offset_right = 512.0
 offset_bottom = 512.0
 color = Color(0, 0.06666667, 0, 1)
 
-[node name="ViewManager" type="Node" parent="." unique_id=1455506871 node_paths=PackedStringArray("subViewport", "worldNode2d")]
+[node name="ViewManager" type="Node" parent="." unique_id=1455506871 node_paths=PackedStringArray("worldBounds", "subViewport", "worldNode2d")]
 script = ExtResource("2_j5wpf")
+worldBounds = NodePath("../Node3D/worldBounds")
 subViewport = NodePath("../SubViewport")
 worldNode2d = NodePath("../SubViewport/Node2D")
 missileViewScene = ExtResource("3_1444q")
@@ -86,6 +99,7 @@ cityViewScene = ExtResource("6_wpru5")
 enemyMissileView3D = ExtResource("8_5uf2e")
 playerMissileView3d = ExtResource("10_thtin")
 explosionView3d = ExtResource("11_3klw6")
+cityView3d = ExtResource("12_nhsc2")
 
 [node name="ShootController" type="Node2D" parent="." unique_id=1862675667 node_paths=PackedStringArray("camera", "monitor")]
 script = ExtResource("6_olnhy")
@@ -130,6 +144,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ne880")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Monitor" unique_id=502431872]
 shape = SubResource("BoxShape3D_g7b7a")
+
+[node name="worldBounds" type="Node3D" parent="Node3D" unique_id=1018846307 node_paths=PackedStringArray("visual")]
+transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 1, 0, 40, -20)
+top_level = true
+script = ExtResource("14_6quo3")
+visual = NodePath("visual")
+
+[node name="visual" type="MeshInstance3D" parent="Node3D/worldBounds" unique_id=155272321]
+mesh = SubResource("QuadMesh_gyc6d")
+surface_material_override/0 = SubResource("StandardMaterial3D_6qx4q")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1717088253]
 
