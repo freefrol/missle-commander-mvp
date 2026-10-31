@@ -1,5 +1,5 @@
 class_name PlayerMissileData
-extends Entity
+extends RadarVisibleEntity
 
 var direction: Vector2
 var speed: float

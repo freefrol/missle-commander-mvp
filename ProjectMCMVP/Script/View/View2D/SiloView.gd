@@ -1,28 +1,34 @@
 class_name SiloView
-extends Node2D
+extends WorldEntity2D
 
 @export var sprite: Sprite2D
 @export var fillSprite: Sprite2D
-var siloData : SiloData
+
+# Оставляем ссылку для удобства (чтобы не делать каст каждый раз)
+var siloData: SiloData
 
 func _ready() -> void:
-	siloData.ready.connect(siloReady)
-	siloData.destroyed.connect(siloDestroed)
+	# Приводим базовый entity к SiloData
+	siloData = entity as SiloData
 	
+	if siloData:
+		siloData.ready.connect(siloReady)
+		siloData.destroyed.connect(siloDestroyed)
+
 func siloReady(silo):
 	if sprite == null: return
 	sprite.modulate = Color.WHITE
 	
-func siloDestroed(silo):
+func siloDestroyed(silo):
 	if sprite == null: return
 	sprite.modulate = Color.GRAY
 	
 func _process(delta: float) -> void:
-	var screenSize = get_viewport_rect().size
-	var side = min(screenSize.x, screenSize.y)
-	var offset = (screenSize - Vector2(side, side)) / 2
-	position = offset + siloData.position * side
+	# 1. Вызываем базовый метод, который двигает вьюху (position = ...)
+	super._process(delta)
 	
+	# 2. Уникальная логика заливки
+	if not siloData: return
 	var progress = siloData.getReloadProgress()
 	var texHeight = fillSprite.texture.get_height()
 	var texWidth = fillSprite.texture.get_width()

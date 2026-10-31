@@ -10,6 +10,8 @@ var enemy_spawner: EnemySpawner
 var siloController: SiloController
 var explosionController: ExplosionController
 var cityController: CityController 
+var radarData: RadarData
+var radarController: RadarController
 
 func _ready():
 	world_data = WorldData.new()
@@ -22,7 +24,9 @@ func _ready():
 	siloController = SiloController.new(world_data)
 	shootController.siloController = siloController
 	shootController.worldData = world_data
-	
+	radarData = RadarData.new()
+	radarController = RadarController.new(world_data, radarData)
+	viewManager.setupRadar(radarData)
 	
 	cityController.allCitiesDestroyed.connect(allCitiesDestroed)
 	restartButton.pressed.connect(onRestartButtonPressed)
@@ -41,3 +45,4 @@ func _process(delta):
 	enemy_spawner.update(delta)
 	siloController.update(delta)
 	explosionController.update(delta)
+	radarController.update(delta)
