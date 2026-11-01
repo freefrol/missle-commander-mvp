@@ -1,7 +1,7 @@
 class_name ShootController
 extends Node2D
 
-@export var missileSpeed: float = 0.1
+@export var missileSpeed: float = 0.08
 @export var camera: Camera3D
 @export var monitor: StaticBody3D
 @export var monitorSize: Vector2 = Vector2(1, 1)

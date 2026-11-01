@@ -69,23 +69,23 @@ func create3DView(entity: Entity, scene: PackedScene):
 # --- МЕТОДЫ ДОБАВЛЕНИЯ ---
 
 func onCityAdded(city: CityData):
-	create2DView(city, cityViewScene)
+	#create2DView(city, cityViewScene)
 	create3DView(city, cityView3d)
 
 func onMissileAdded(missile: MissileData):
-	create2DView(missile, missileViewScene)
+	#create2DView(missile, missileViewScene)
 	create3DView(missile, enemyMissileView3D)
 
 func onSiloAdded(silo: SiloData):
-	create2DView(silo, siloViewScene)
+	#create2DView(silo, siloViewScene)
 	create3DView(silo, siloView3d)
 
 func onPlayerMissileAdded(missile: PlayerMissileData):
-	create2DView(missile, playerMissileViewScene)
+	#create2DView(missile, playerMissileViewScene)
 	create3DView(missile, playerMissileView3d)
 
 func onExplosionAdded(explosion: ExplosionData):
-	create2DView(explosion, explosionView)
+	#create2DView(explosion, explosionView)
 	create3DView(explosion, explosionView3d)
 
 # --- МЕТОД УДАЛЕНИЯ ---

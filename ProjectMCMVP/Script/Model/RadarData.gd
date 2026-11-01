@@ -3,7 +3,7 @@ extends RefCounted
 
 var sweep_angle: float = 0.0
 var sweep_speed: float = 1.57 
-var max_fade_time: float = 3.0
+var max_fade_time: float = 3.0 # Запасное время, если у сущности не задано
 
 # Теперь храним: Entity -> { "time": float, "pos": Vector2 }
 var detected_entities: Dictionary = {}
@@ -16,17 +16,21 @@ func update(delta: float):
 	var to_remove: Array = []
 	
 	for entity in detected_entities.keys():
-		# Увеличиваем время
 		detected_entities[entity]["time"] += delta
 		
-		if detected_entities[entity]["time"] >= max_fade_time:
+		# Берем время затухания из самой сущности (у ракет 3.0, у взрывов 0.5)
+		var f_time = max_fade_time
+		if entity is RadarVisibleEntity:
+			f_time = entity.fade_time
+			
+		if detected_entities[entity]["time"] >= f_time:
 			to_remove.append(entity)
 			
 	for entity in to_remove:
 		detected_entities.erase(entity)
 
-# Сохраняем позицию в момент обнаружения!
 func ping_entity(entity: Entity):
+	# Сохраняем время и позицию на момент обнаружения
 	detected_entities[entity] = {
 		"time": 0.0,
 		"pos": entity.position
@@ -35,9 +39,13 @@ func ping_entity(entity: Entity):
 func get_blip_opacity(entity: Entity) -> float:
 	if not detected_entities.has(entity): return 0.0
 	var time_passed = detected_entities[entity]["time"]
-	return 1.0 - (time_passed / max_fade_time)
+	
+	var f_time = max_fade_time
+	if entity is RadarVisibleEntity:
+		f_time = entity.fade_time
+		
+	return 1.0 - (time_passed / f_time)
 
-# Новый метод: получить сохраненную позицию
 func get_blip_position(entity: Entity) -> Vector2:
 	if detected_entities.has(entity):
 		return detected_entities[entity]["pos"]

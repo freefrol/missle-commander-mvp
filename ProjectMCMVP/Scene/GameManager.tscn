@@ -88,7 +88,7 @@ cityView3d = ExtResource("12_nhsc2")
 
 [node name="ShootController" type="Node2D" parent="." unique_id=1862675667 node_paths=PackedStringArray("camera", "monitor")]
 script = ExtResource("6_olnhy")
-missileSpeed = 0.4
+missileSpeed = 0.2
 camera = NodePath("../WorldNode3D/Bunker/Player/CameraPivot/Camera3D")
 monitor = NodePath("../WorldNode3D/Bunker/Monitor")
 

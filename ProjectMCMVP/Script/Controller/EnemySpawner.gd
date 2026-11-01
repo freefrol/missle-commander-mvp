@@ -3,8 +3,8 @@ extends RefCounted
 
 var world_data: WorldData
 
-var spawn_interval: float = 1.5
-var speed: float = 0.1
+var spawn_interval: float = 4.5
+var speed: float = 0.08
 var spawn_y_offset: float = 0.1
 var explodeY: float = 0.9
 var min_angle: float = 0

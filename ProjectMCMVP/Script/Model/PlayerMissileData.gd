@@ -4,7 +4,7 @@ extends RadarVisibleEntity
 var direction: Vector2
 var speed: float
 var targetPos: Vector2
-var radiusExplode: float = 0.2
+var radiusExplode: float = 0.05
 
 signal detonated(position: Vector2, owner: Entity.Owner, radius: float, missile:PlayerMissileData)
 
@@ -14,6 +14,7 @@ func _init(p_position, p_target, p_speed):
 	speed = p_speed
 	targetPos = p_target
 	direction = (p_target - p_position).normalized()
+	blip_color = Color.GREEN
 
 func getType() -> Type:
 	return Type.PLAYER_MISSILE

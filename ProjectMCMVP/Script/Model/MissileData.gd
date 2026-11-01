@@ -4,7 +4,7 @@ extends RadarVisibleEntity
 var speed: float
 var direction: Vector2
 var explodY: float
-var radiusExplode: float = 0.2
+var radiusExplode: float = 0.1
 
 signal detonated(position: Vector2, owner: Entity.Owner, radius: float, missile:MissileData)
 
